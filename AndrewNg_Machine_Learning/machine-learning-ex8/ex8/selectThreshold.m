@@ -20,19 +20,17 @@ for epsilon = min(pval):stepsize:max(pval)
     %               choice of epsilon and set it to be the best epsilon if
     %               it is better than the current choice of epsilon.
     %               
-    % Note: You can use predictions = (pval < epsilon) to get a binary vector
+    % Note: You can use cvpredictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
 
-
-
-
-
-
-
-
-
-
-
+    cvpredictions = (pval < epsilon);
+    fp = sum((cvpredictions ==1)&(yval==0));
+    fn = sum((cvpredictions ==0)&(yval==1));
+    tp = sum((cvpredictions ==1)&(yval==1));
+    prec = tp/(tp+fp);
+    rec = tp/(tp+fn);
+    F1 = (2*prec*rec)/(prec+rec);
+  
 
 
     % =============================================================
